@@ -5,7 +5,7 @@ namespace OnlineShop.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HomeController : ControllerBase
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 

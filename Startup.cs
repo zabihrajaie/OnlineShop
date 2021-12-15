@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShop.Domain.Dtos;
+using OnlineShop.Installer;
 
 namespace OnlineShop
 {
@@ -20,6 +22,8 @@ namespace OnlineShop
         {
             var settings = Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>();
             services.AddSingleton(settings);
+
+            services.InstallServicesInAssemblies(settings);
 
             services.AddControllers();
         }
