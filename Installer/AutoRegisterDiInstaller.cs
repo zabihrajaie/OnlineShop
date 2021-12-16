@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using NetCore.AutoRegisterDi;
 using OnlineShop.Domain.Dtos;
 using OnlineShop.Domain.Entities;
+using OnlineShop.Repository.EntityFramework.Repositories;
+using OnlineShop.Service;
 
 namespace OnlineShop.Installer
 {
@@ -11,8 +13,8 @@ namespace OnlineShop.Installer
     {
         public void InstallServices(IServiceCollection services, AppSettings appSettings, Assembly startupProjectAssembly)
         {
-            var dataAssembly = typeof(SendType).Assembly;
-            var serviceAssembly = typeof(SendType).Assembly;
+            var dataAssembly = typeof(SendTypeRepository).Assembly;
+            var serviceAssembly = typeof(SendTypeService).Assembly;
             var configurationAssembly = Assembly.GetExecutingAssembly();
             var assembliesToScan = new[] { dataAssembly, serviceAssembly, configurationAssembly };
 

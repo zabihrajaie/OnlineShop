@@ -1,21 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using OnlineShop.Domain.Services;
 
 namespace OnlineShop.Controllers
 {
-    public class PackMethodController : BaseController
+    [ApiController]
+    [Route("[controller]")]
+    public class SendTypeController : BaseController
     {
-        private readonly IPackMethodService _packMethodService;
+        private readonly ISendTypeService _sendTypeService;
+        private readonly ILogger<SendTypeController> _logger;
 
-        public PackMethodController(IPackMethodService packMethodService)
+        public SendTypeController(ISendTypeService sendTypeService, ILogger<SendTypeController> logger)
         {
-            _packMethodService = packMethodService;
+            _sendTypeService = sendTypeService;
+            _logger = logger;
         }
 
-        // GET
+        [HttpGet("Index")]
         public IActionResult Index()
         {
-            return Ok();
+            return Ok("SendType");
         }
     }
 }
