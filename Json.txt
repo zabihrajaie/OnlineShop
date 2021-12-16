@@ -1,0 +1,132 @@
+        private class OutClassDto
+        {
+            public string OutClass_ClassA_ClassAb_ClassAbName { get; set; }
+            public string OutClass_ClassB_ClassBName { get; set; }
+            public string OutClass_Name { get; set; }
+            public string ClassA_ClassAb_ClassAbName { get; set; }
+            public string ClassA_ClassaName { get; set; }
+            public string ClassB_ClassBName { get; set; }
+            public string ClassAB_ClassAbName { get; set; }
+        }
+
+        private class OutClass
+        {
+            public ClassA ClassA { get; set; }
+            public ClassB ClassB { get; set; }
+            public string Name { get; set; }
+        }
+
+        private class ClassA
+        {
+            public ClassAB ClassAb { get; set; }
+            public string ClassaName { get; set; }
+        }
+
+        private class ClassB
+        {
+            public string ClassBName { get; set; }
+        }
+
+        private class ClassAB
+        {
+            public string ClassAbName { get; set; }
+        }
+
+        private class KeyStore
+        {
+            public string ShipKey { get; set; }
+            public string ServerKey { get; set; }
+            public bool IsNecessary { get; set; }
+        }
+
+        [HttpGet("ShipJson")]
+        public async Task<IActionResult> Get()
+        {
+            string json = @"{
+    '0105': 'Star Wars',
+    '010': 'http://www.starwars.com',
+    'description': 'Star Wars blog.',
+    'obsolete': 'Obsolete value',
+    'DG3-VOLTAGE': '0.000000',
+    '4000100': 'OK',
+    'COMERR A019': 'COMERR A019'
+}";
+
+            var keyStores = new List<KeyStore>
+            {
+                new KeyStore
+                {
+                    ServerKey = "OutClass_ClassA_ClassAb_ClassAbName",
+                    ShipKey = "0105",
+                    IsNecessary=true
+                },
+                new KeyStore
+                {
+                    ServerKey = "OutClass_ClassB_ClassBName",
+                    ShipKey = "010"
+                },
+                new KeyStore
+                {
+                    ServerKey = "OutClass_Name",
+                    ShipKey = "description"
+                },
+                new KeyStore
+                {
+                    ServerKey = "ClassA_ClassAb_ClassAbName",
+                    ShipKey = "obsolete"
+                },
+                new KeyStore
+                {
+                    ServerKey = "ClassA_ClassaName",
+                    ShipKey = "DG3-VOLTAGE"
+                },
+                new KeyStore
+                {
+                    ServerKey = "ClassB_ClassBName",
+                    ShipKey = "4000100"
+                },
+                new KeyStore
+                {
+                    ServerKey = "ClassAB_ClassAbName",
+                    ShipKey = "COMERR A019"
+                }
+            };
+
+            var rss = JObject.Parse(json);
+
+            var listJson = rss.Properties().ToList();
+
+            foreach (var item in listJson)
+            {
+                if (keyStores.Any(store => store.ShipKey == item.Name))
+                {
+                    item.AddAfterSelf(new JProperty(
+                        keyStores.FirstOrDefault(store => store.ShipKey == item.Name)?.ServerKey ?? string.Empty,
+                        item.Value));
+                }
+
+                item.Remove();
+            }
+
+            var outClassDto = rss.ToObject<OutClassDto>();
+
+            var outClass = new OutClass
+            {
+                Name = outClassDto?.OutClass_Name,
+                ClassA = new ClassA
+                {
+                    ClassAb = new ClassAB
+                    {
+                        ClassAbName = outClassDto?.OutClass_ClassA_ClassAb_ClassAbName
+                    },
+                    ClassaName = outClassDto?.ClassA_ClassaName
+                },
+                ClassB = new ClassB
+                {
+                    ClassBName = outClassDto?.OutClass_ClassB_ClassBName
+                }
+            };
+
+
+            return Ok(outClass);
+        }
