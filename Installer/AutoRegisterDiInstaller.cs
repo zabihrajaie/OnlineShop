@@ -35,7 +35,7 @@ namespace OnlineShop.Installer
             #region Transient Dependency Interface
             services.RegisterAssemblyPublicNonGenericClasses(assembliesToScan)
                 .Where(c => c.GetInterfaces().Contains(typeof(ITransientDependency)))
-                .AsPublicImplementedInterfaces(); // Default is Transient
+                .AsPublicImplementedInterfaces();
             #endregion
 
             #region Register DIs By Name
