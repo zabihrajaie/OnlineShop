@@ -3,7 +3,6 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using NetCore.AutoRegisterDi;
 using OnlineShop.Domain.Dtos;
-using OnlineShop.Domain.Entities;
 using OnlineShop.Repository.EntityFramework.Repositories;
 using OnlineShop.Service;
 
