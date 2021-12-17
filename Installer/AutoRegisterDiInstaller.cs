@@ -12,8 +12,8 @@ namespace OnlineShop.Installer
     {
         public void InstallServices(IServiceCollection services, AppSettings appSettings, Assembly startupProjectAssembly)
         {
-            var dataAssembly = typeof(SendTypeRepository).Assembly;
-            var serviceAssembly = typeof(SendTypeService).Assembly;
+            var dataAssembly = typeof(UserRepository).Assembly;
+            var serviceAssembly = typeof(UserService).Assembly;
             var configurationAssembly = Assembly.GetExecutingAssembly();
             var assembliesToScan = new[] { dataAssembly, serviceAssembly, configurationAssembly };
 
