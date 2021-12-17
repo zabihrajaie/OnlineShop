@@ -35,12 +35,10 @@ namespace OnlineShop
                 {
                     Title = "Online Shop",
                     Version = "v1",
-                    Description = "Description for the API goes here.",
+                    Description = "Online Shop Description",
                     Contact = new OpenApiContact
                     {
-                        Name = "Ankush Jain",
-                        Email = string.Empty,
-                        //Url = new Uri("https://coderjony.com/"),
+                        Name = "Online Shop Name",
                     },
                 });
             });

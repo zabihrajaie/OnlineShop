@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OnlineShop.Domain.Dtos.SendType;
 using OnlineShop.Domain.Services;
 
 namespace OnlineShop.Controllers
@@ -17,10 +19,17 @@ namespace OnlineShop.Controllers
             _logger = logger;
         }
 
-        [HttpGet("Index")]
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> GetAll([FromQuery] SendTypesFilterDto dto)
         {
-            return Ok("SendType");
+            return Ok(await _sendTypeService.GetAll(dto));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(SendTypeAddDto dto)
+        {
+            await _sendTypeService.AddAsync(dto);
+            return Created(nameof(Post), dto);
         }
     }
 }
