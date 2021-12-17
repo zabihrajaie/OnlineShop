@@ -11,7 +11,7 @@
         "Name": "MSSqlServer",
         "Args": {
           "connectionString": "data source=.;initial catalog=OnlineShopLog;persist security info=True;user id=OnlineShopUser;password=Sql2019;MultipleActiveResultSets=True;App=EntityFramework",
-          "tableName": "SmartShipServerLog",
+          "tableName": "Log",
           "autoCreateSqlTable": true,
           "columnOptionsSection": {
             "addStandardColumns": [ "LogEvent" ],

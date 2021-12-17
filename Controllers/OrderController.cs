@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using OnlineShop.Domain.Dtos.Order;
 using OnlineShop.Domain.Services;
@@ -20,6 +21,15 @@ namespace OnlineShop.Controllers
         public async Task<IActionResult> GetAll([FromQuery] OrdersFilterDto dto)
         {
             return Ok(await _orderService.GetAll(dto));
+        }
+
+        [HttpGet("{userId:guid}")]
+        public async Task<IActionResult> GetByUserId(Guid userId, [FromQuery] UserOrdersFilterDto dto)
+        {
+            if (userId != dto.UserId)
+                return BadRequest();
+
+            return Ok(await _orderService.GetByUserId(dto));
         }
 
         [HttpPost]
