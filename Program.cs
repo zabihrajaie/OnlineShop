@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
+using OnlineShop.Repository.EntityFramework.Extensions;
 using Serilog;
 
 namespace OnlineShop
@@ -18,7 +19,7 @@ namespace OnlineShop
                 .CreateLogger();
             try
             {
-                CreateHostBuilder(args).Build()/*.MigrateDatabase()*/.Run();
+                CreateHostBuilder(args).Build().MigrateDatabase().Run();
             }
             catch (Exception ex)
             {

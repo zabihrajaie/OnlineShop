@@ -4,9 +4,9 @@ using OnlineShop.Domain.Services;
 
 namespace OnlineShop.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    public class SendTypeController : BaseController
+    public class SendTypeController : ControllerBase
     {
         private readonly ISendTypeService _sendTypeService;
         private readonly ILogger<SendTypeController> _logger;

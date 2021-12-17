@@ -3,9 +3,9 @@ using Microsoft.Extensions.Logging;
 
 namespace OnlineShop.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    public class HomeController : BaseController
+    public class HomeController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -14,7 +14,7 @@ namespace OnlineShop.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("Get")]
         public IActionResult Get()
         {
             return Ok("Ok");

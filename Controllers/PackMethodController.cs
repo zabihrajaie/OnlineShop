@@ -4,7 +4,9 @@ using OnlineShop.Domain.Services;
 
 namespace OnlineShop.Controllers
 {
-    public class PackMethodController : BaseController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PackMethodController : ControllerBase
     {
         private readonly IPackMethodService _packMethodService;
         private readonly ILogger<PackMethodController> _logger;
@@ -15,7 +17,7 @@ namespace OnlineShop.Controllers
             _logger = logger;
         }
 
-        // GET
+        [HttpGet("GetPack")]
         public IActionResult Index()
         {
             return Ok("PackMethod");
